@@ -1,20 +1,8 @@
 const Discord = require('discord.js');
 
-module.exports.run = async(client,message, args) => {
-
-    if(!message.guild.member(message.author).hasPermission("MANAGE_ROLES"))
-        return message.channel.send(`vous n'avez pas la permission !`);
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES"))
-        return message.channel.send('Je n\'ai pas la permission !');
-
-    let member = message.guild.member(message.mentions.users.first());
-    if(!member) return message.channel.send(`L'utilisateur n'a pas été trouvé`);
-
-    let role = message.guild.roles.cache.find(x => x.name === args[1]);
-
-    member.roles.add(role.id).catch(console.error).then(mx => {
-        message.channel.send(`${member} a maintenant le rôle ${role.name}`);
-    });
+module.exports.run = async(guild, member, args) => {
+    let role = guild.roles.cache.find(x => x.name === args);
+    member.roles.add(role.id).catch(console.error)
 }
 
 module.exports.help = {

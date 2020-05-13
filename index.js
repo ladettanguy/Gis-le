@@ -32,8 +32,3 @@ fs.readdir("./Events/", (error, files) => {
         client.on(event, events.bind(null,client));
     });
 });
-
-client.on('messageReactionAdd', (messageReaction) => {
-    console.log("j'ia bien vu la réaction");
-    console.log(messageReaction.message)
-})
